@@ -15,10 +15,10 @@ end
 
 function Think()
 	local time = GameRules:GetDOTATime(false, false)
-	if time % 50 < 1 and time > 1 and port_opened == false then 	--if 5 minutes passed and portal not open
+	if time % 300 < 1 and time > 1 and port_opened == false then 	--if 5 minutes passed and portal not open
 	--if time % 300 < 1 and port_opened == false then
 		OpenPortal()
-	elseif time % 50 > 60 and port_opened == true then	--if 1 minute since opened
+	elseif time % 300 > 60 and port_opened == true then	--if 1 minute since opened
 		ClosePortal()
 	elseif sheep_taken == false and port_opened == true then --if opened and no sheep taken
 		TakeSheep()

@@ -1,15 +1,11 @@
-local port_opened = false
-local sheep_taken = false
-local AbilitySpawnArena = nil
-
-
-
 function Spawn()
-	temp = Entities:FindAllByName("radboss")
-	temp2 = Entities:FindAllByName("direboss")
-	radboss = temp[1]
-	direboss = temp2[1]
-	--AbilitySpawnArena = thisEntity:FindAbilityByName("SpawnArena")
+	port_opened = false
+	sheep_taken = false
+	foundwinner = false
+	radboss = Entities:FindAllByName("radboss")[1]
+	direboss = Entities:FindAllByName("direboss")[1]
+	badfount = Entities:FindAllByName("ent_dota_fountain_bad")[1]
+	goodfount = Entities:FindAllByName("ent_dota_fountain_good")[1]
 	thisEntity:SetContextThink("Think", Think, 10)
 end
 
@@ -28,13 +24,21 @@ function Think()
 end
 
 function CheckReach()
-	local targets = FindUnitsInRadius(	thisEntity:GetTeam(), thisEntity:GetAbsOrigin(), nil, 200,
-						DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL,
-						DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_CLOSEST, false)
-	if targets[1] = direboss then
+	if foundwinner then
+		return
+	end
+	local bosses = FindUnitsInRadius(thisEntity:GetTeam(), thisEntity:GetAbsOrigin(), nil, 200,
+					DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL,
+					DOTA_UNIT_TARGET_FLAG_NONE, FIND_CLOSEST, false)
+	if bosses[1] == direboss then
+		foundwinner = true
 		radboss:RemoveModifierByName("bossmod")
-	elseif targets[1] = radboss then
+		goodfount:AddNewModifier(thisEntity, nil, "modifier_stunned", {})
+
+	elseif bosses[1] == radboss then
+		foundwinner = true
 		direboss:RemoveModifierByName("bossmod")
+		badfount:AddNewModifier(thisEntity, nil, "modifier_stunned", {})
 	end
 end
 

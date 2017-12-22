@@ -8,6 +8,11 @@ end
 function Think()
 	if thisEntity:IsAlive() ~= true then
 		deathscream()
+		local expload =	ParticleManager:CreateParticle("particles/units/heroes/hero_sandking/sandking_caustic_finale_explode.vpcf",
+						PATTACH_ABSORIGIN, thisEntity)
+		ParticleManager:SetParticleControl(expload, 0, thisEntity:GetAbsOrigin())
+		ParticleManager:SetParticleControl(expload, 1, Vector(particle_radius,0,0))
+		thisEntity:EmitSound("sounds/weapons/hero/sand_king/sand_king_caustic_bodyexplode.vsnd")
 		return nil
 	end
 	
@@ -23,12 +28,12 @@ function Think()
 		follow()
 	end
  
-	return 0.5
+	return 0.25
 end
 
 function follow()
 	if leader:IsAlive() ~= true or CalcDistanceBetweenEntityOBB(thisEntity, leader) > 800 then
-		thisEntity:MoveToPosition(thisEntity:GetAbsOrigin())
+		thisEntity:Stop()	
 		DebugDrawText(thisEntity:GetAbsOrigin(), "Please dont leave me", false, 3)
 		leader = nil
 		return
@@ -41,7 +46,7 @@ end
 
 function deathscream()
 	local value = RandomInt(1, 5)
-	local pos = victim:GetAbsOrigin() + Vector(RandomInt(-20, 20), RandomInt(-20, 20), 0)
+	local pos = thisEntity:GetAbsOrigin() + Vector(RandomInt(-20, 20), RandomInt(-20, 20), 0)
 	if value == 1 then
 		DebugDrawText(pos, "Baaaa", false, 3)
 	elseif value == 2 then

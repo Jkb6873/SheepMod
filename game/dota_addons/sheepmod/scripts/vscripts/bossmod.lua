@@ -23,11 +23,13 @@ end
 function GameMode:DamageFilter(params)
 	if params.entindex_attacker_const == nil then
 		return true
-	elseif  (not EntIndexToHScript(params.entindex_attacker_const):IsCreep()) and
-		EntIndexToHScript(params.entindex_victim_const):HasModifier("bossmod") then
+	end
+	local attacker = EntIndexToHScript(params.entindex_attacker_const)
+	local victim = EntIndexToHScript(params.entindex_victim_const)
+	if  victim:HasModifier("bossmod") and 
+		(not attacker:IsCreep() or attacker:IsSummoned() or attacker:IsIllusion()) then
 		return false
-	else 
-		PrintTable(params)
+	else
 		return true
 	end
 end

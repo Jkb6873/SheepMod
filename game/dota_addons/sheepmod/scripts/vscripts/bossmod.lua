@@ -16,9 +16,8 @@ function bossmod:DeclareFunctions()
 end
 
 function bossmod:OnCreated()
-	GameRules	:GetGameModeEntity()
+	GameRules:	GetGameModeEntity()
 				:SetDamageFilter(Dynamic_Wrap(GameMode, "DamageFilter"), self)
-	self:GetParent()
 end
 
 function GameMode:DamageFilter(params)

@@ -23,7 +23,19 @@ function Think()
 	elseif sheep_taken == false and port_opened == true then --if opened and no sheep taken
 		TakeSheep()
 	end	
-	return 1
+	CheckReach()
+	return .5
+end
+
+function CheckReach()
+	local targets = FindUnitsInRadius(	thisEntity:GetTeam(), thisEntity:GetAbsOrigin(), nil, 200,
+						DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL,
+						DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_CLOSEST, false)
+	if targets[1] = direboss then
+		radboss:RemoveModifierByName("bossmod")
+	elseif targets[1] = radboss then
+		direboss:RemoveModifierByName("bossmod")
+	end
 end
 
 function OpenPortal()

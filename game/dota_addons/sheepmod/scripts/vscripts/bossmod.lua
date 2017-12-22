@@ -18,6 +18,7 @@ end
 function bossmod:OnCreated()
 	GameRules	:GetGameModeEntity()
 				:SetDamageFilter(Dynamic_Wrap(GameMode, "DamageFilter"), self)
+	self:GetParent()
 end
 
 function GameMode:DamageFilter(params)
@@ -26,8 +27,13 @@ function GameMode:DamageFilter(params)
 	end
 	local attacker = EntIndexToHScript(params.entindex_attacker_const)
 	local victim = EntIndexToHScript(params.entindex_victim_const)
+	--if the victim is a boss and the attacker is not a creep, negate damage
 	if  victim:HasModifier("bossmod") and 
 		(not attacker:IsCreep() or attacker:IsSummoned() or attacker:IsIllusion()) then
+		return false
+	elseif victim:GetUnitName() == "sheep" then
+		local pos = victim:GetAbsOrigin() + Vector(RandomInt(-20, 20), RandomInt(-20, 20), 0)
+		DebugDrawText(pos, "Baaaa", false, 1)
 		return false
 	else
 		return true

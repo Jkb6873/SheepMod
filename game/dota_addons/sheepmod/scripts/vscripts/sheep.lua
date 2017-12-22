@@ -41,16 +41,17 @@ end
 
 function deathscream()
 	local value = RandomInt(1, 5)
+	local pos = victim:GetAbsOrigin() + Vector(RandomInt(-20, 20), RandomInt(-20, 20), 0)
 	if value == 1 then
-		DebugDrawText(thisEntity:GetAbsOrigin(), "Baaaa", false, 3)
+		DebugDrawText(pos, "Baaaa", false, 3)
 	elseif value == 2 then
-		DebugDrawText(thisEntity:GetAbsOrigin(), "Monster.", false, 3)
+		DebugDrawText(pos, "Monster.", false, 3)
 	elseif value == 3 then
-		DebugDrawText(thisEntity:GetAbsOrigin(), "See you in hell", false, 3)
+		DebugDrawText(pos, "See you in hell", false, 3)
 	elseif value == 4 then
-		DebugDrawText(thisEntity:GetAbsOrigin(), "You could have prevented this.", false, 3)
+		DebugDrawText(pos, "You could have prevented this.", false, 3)
 	else
-		DebugDrawText(thisEntity:GetAbsOrigin(), "I embrace the void.", false, 3)
+		DebugDrawText(pos, "I embrace the void.", false, 3)
 	end
 	return
 end

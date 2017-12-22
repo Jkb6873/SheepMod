@@ -15,6 +15,29 @@ function bossmod:DeclareFunctions()
 	return funcs
 end
 
+function bossmod:OnCreated()
+	GameRules	:GetGameModeEntity()
+				:SetDamageFilter(Dynamic_Wrap(GameMode, "DamageFilter"), self)
+end
+
+function GameMode:DamageFilter(params)
+	if params.entindex_attacker_const == nil then
+		return true
+	elseif  (not EntIndexToHScript(params.entindex_attacker_const):IsCreep()) and
+		EntIndexToHScript(params.entindex_victim_const):HasModifier("bossmod") then
+		return false
+	else 
+		PrintTable(params)
+		return true
+	end
+end
+
+function bossmod:OnDestroy()
+	GameRules	:GetGameModeEntity()
+				:ClearDamageFilter()
+end
+
+
 function bossmod:OnDeath(params)
 	if not (params.unit == self:GetParent()) then
 		return

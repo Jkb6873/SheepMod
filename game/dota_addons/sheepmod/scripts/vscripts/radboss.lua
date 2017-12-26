@@ -47,6 +47,7 @@ function Feed()
 	for key,unit in pairs(targets) do
 		if unit:IsAlive() == true and unit:GetModelName() == "models/props_gameplay/sheep01.vmdl" then
 			unit:Kill(nil, nil)		--test via model. This is because entities spawned via script will not have the correct name
+			EmitSoundOn("Ability.SandKing_CausticFinale", thisEntity)
 			sheepsfed = sheepsfed + 1
 		end
 	end

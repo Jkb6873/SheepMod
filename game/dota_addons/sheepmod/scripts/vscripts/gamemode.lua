@@ -66,7 +66,6 @@ end
   This function should generally only be used if the Precache() function in addon_game_mode.lua is not working.
 ]]
 function GameMode:PostLoadPrecache()
-  DebugPrint("[BAREBONES] Performing Post-Load precache")    
   --PrecacheItemByNameAsync("item_example_item", function(...) end)
   --PrecacheItemByNameAsync("example_ability", function(...) end)
 

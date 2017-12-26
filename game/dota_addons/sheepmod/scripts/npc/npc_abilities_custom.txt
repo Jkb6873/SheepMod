@@ -1,14 +1,5 @@
 // Dota Heroes File
 "DOTAAbilities"
 {
-	//SpawnArena{
-	//	"Id"			"6873"
-	//	"BaseClass"		"ability_lua"
-	//	"ScriptFile"		"SpawnArena.lua"
-	//	"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
-	//	"MaxLevel"		"1"
-	//	"RequiredLevel"		"1"
-	//	"LevelsBetweenUpgrades"	"1"
-	//	"AbilitySpecial"	{}
-	//}
+
 }

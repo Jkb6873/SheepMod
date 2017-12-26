@@ -12,7 +12,7 @@ function Think()
 						PATTACH_ABSORIGIN, thisEntity)
 		ParticleManager:SetParticleControl(expload, 0, thisEntity:GetAbsOrigin())
 		ParticleManager:SetParticleControl(expload, 1, Vector(particle_radius,0,0))
-		thisEntity:EmitSound("sounds/weapons/hero/sand_king/sand_king_caustic_bodyexplode.vsnd")
+		EmitSoundOn("Ability.SandKing_CausticFinale", thisEntity)
 		return nil
 	end
 	
@@ -23,6 +23,7 @@ function Think()
 		if #units ~= 0 then
 			leader = units[1]
 			thisEntity:SetTeam(leader:GetTeam())
+			thisEntity:EmitSound("sounds/ambient/sheep.vsnd")
 		end
 	else 
 		follow()

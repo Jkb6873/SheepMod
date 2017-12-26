@@ -66,8 +66,8 @@ end
 function TakeSheep() 
 	print ("we accepting sheep")
 	local targets = FindUnitsInRadius(	thisEntity:GetTeam(), thisEntity:GetAbsOrigin(), nil, 100,
-						DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL,
-						DOTA_UNIT_TARGET_FLAG_NONE, FIND_CLOSEST, false)
+					DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL,
+					DOTA_UNIT_TARGET_FLAG_NONE, FIND_CLOSEST, false)
 	for key,unit in pairs(targets) do
 		if unit:IsAlive() == true and unit:GetModelName() == "models/props_gameplay/sheep01.vmdl" then
 			unit:Kill(nil, nil)

@@ -1,16 +1,21 @@
-bossmod = class({})
+bossprotection = class({})
 
-function bossmod:IsHidden()
+function bossprotection:IsHidden()
 	return true
 end
 
-function bossmod:IsPurgable()
+function bossprotection:IsPurgable()
 	return false
 end
 
-function bossmod:OnCreated()
+function bossprotection:OnCreated()
 	GameRules:	GetGameModeEntity()
 				:SetDamageFilter(Dynamic_Wrap(GameMode, "DamageFilter"), self)
+end
+
+function bossprotection:OnDestroy()
+	GameRules	:GetGameModeEntity()
+				:ClearDamageFilter()
 end
 
 function GameMode:DamageFilter(params)
@@ -20,21 +25,27 @@ function GameMode:DamageFilter(params)
 	local attacker = EntIndexToHScript(params.entindex_attacker_const)
 	local victim = EntIndexToHScript(params.entindex_victim_const)
 	--if the victim is a boss and the attacker is not a creep, negate damage
-	if  victim:HasModifier("bossmod") and 
+	if  victim:HasModifier("bossprotection") and 
 		(not attacker:IsCreep() or attacker:IsSummoned() or attacker:IsIllusion()) then
 		return false
 	elseif victim:GetUnitName() == "sheep" then
 		local pos = victim:GetAbsOrigin() + Vector(RandomInt(-20, 20), RandomInt(-20, 20), 0)
 		DebugDrawText(pos, "Baaaa", false, 1)
+		EmitBaaa(victim)
 		return false
 	else
 		return true
 	end
 end
 
-function bossmod:OnDestroy()
-	GameRules	:GetGameModeEntity()
-				:ClearDamageFilter()
+function EmitBaaa(entity)
+	print("WE GOT HERE")
+	local x = RandomInt(1, 100)
+	if x == 100 then
+		entity:EmitSound("axe_axe_sheepstick_02")
+	elseif x % 2 == 0 then
+		entity:EmitSound("Hero_ShadowShaman.SheepHex.Target")
+	else
+		entity:EmitSound("axe_axe_sheepstick_01")
+	end
 end
-
-

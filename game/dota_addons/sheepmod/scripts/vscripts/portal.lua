@@ -20,24 +20,26 @@ function Think()
 		TakeSheep()
 	end	
 	CheckReach()
-	return .5
+	return .25
 end
 
 function CheckReach()
 	if foundwinner then
 		return
 	end
-	local bosses = FindUnitsInRadius(thisEntity:GetTeam(), thisEntity:GetAbsOrigin(), nil, 200,
+	local bosses = FindUnitsInRadius(thisEntity:GetTeam(), thisEntity:GetAbsOrigin(), nil, 50,
 					DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL,
 					DOTA_UNIT_TARGET_FLAG_NONE, FIND_CLOSEST, false)
 	if bosses[1] == direboss then
+		direboss:Stop()
 		foundwinner = true
-		radboss:RemoveModifierByName("bossmod")
+		radboss:RemoveModifierByName("bossprotection")
 		goodfount:AddNewModifier(thisEntity, nil, "modifier_stunned", {})
 
 	elseif bosses[1] == radboss then
+		radboss:Stop()
 		foundwinner = true
-		direboss:RemoveModifierByName("bossmod")
+		direboss:RemoveModifierByName("bossprotection")
 		badfount:AddNewModifier(thisEntity, nil, "modifier_stunned", {})
 	end
 end

@@ -10,11 +10,9 @@ function winmod:IsPurgable()
 end
 
 function winmod:DeclareFunctions()
-	local funcs = {
-		MODIFIER_EVENT_ON_DEATH
-	}
-	return funcs
+	return {MODIFIER_EVENT_ON_DEATH}
 end
+
 
 function winmod:OnDeath(params)
 	if not (params.unit == self:GetParent()) then

@@ -1,11 +1,11 @@
 local sheepsfed = 0		--im setting these counters up to allow feeding sheep at all times, and allow stacking durations instead of refreshing. 
 local timer = 0
 
-LinkLuaModifier("bossmod","bossmod.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("bossprotection","bossprotection.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("winmod", "winmod.lua", LUA_MODIFIER_MOTION_NONE)
 
 function Spawn( entityKeyValues )	--links the keyvalue file, which defines stuff like npc model. Can also be done in LUA, but cleaner this way. 
-	thisEntity:AddNewModifier(nil, nil, "bossmod", {})
+	thisEntity:AddNewModifier(nil, nil, "bossprotection", {})
 	thisEntity:AddNewModifier(nil, nil, "winmod", {})
 	thisEntity:AddNewModifier(nil, nil, "modifier_state_flying_for_pathing_purposes_only", {})
 	thisEntity:SetContextThink( "AIThink", AIThink, 0 )

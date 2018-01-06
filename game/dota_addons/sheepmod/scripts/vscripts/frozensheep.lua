@@ -1,12 +1,6 @@
-function Spawn( entityKeyValues )
-	thisEntity:SetContextThink( "Think", Think, 0 )
-end
+LinkLuaModifier("frozenmod","frozenmod", LUA_MODIFIER_MOTION_NONE)
 
-function Think ()
-	if thisEntity:IsAlive() == false then
-		v1 = thisEntity:GetAbsOrigin()
-		local unit = CreateUnitByName("sheep", v1, true,nil,nil,DOTA_TEAM_NEUTRALS)
-		return nil
-	end
-	return 1		
+
+function Spawn( entityKeyValues )
+	thisEntity:AddNewModifier(nil, nil, "frozenmod", {})
 end

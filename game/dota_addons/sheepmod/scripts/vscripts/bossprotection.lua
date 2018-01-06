@@ -18,6 +18,19 @@ function bossprotection:OnDestroy()
 				:ClearDamageFilter()
 end
 
+function bossprotection:CheckState()
+	local state = {}
+	state[MODIFIER_STATE_MAGIC_IMMUNE] = true
+	return state
+end
+
+
+
+
+
+
+
+
 function GameMode:DamageFilter(params)
 	if params.entindex_attacker_const == nil then
 		return true

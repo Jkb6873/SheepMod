@@ -5,6 +5,7 @@ LinkLuaModifier("bossmod","bossmod", LUA_MODIFIER_MOTION_NONE)
 
 function Spawn( entityKeyValues )	--links the keyvalue file, which defines stuff like npc model. Can also be done in LUA, but cleaner this way. 
 	thisEntity:AddNewModifier(nil, nil, "bossmod", {})
+	thisEntity:AddNewModifier(nil, nil, "winmod", {})
 	thisEntity:AddNewModifier(nil, nil, "modifier_state_flying_for_pathing_purposes_only", {})
 	local temp = Entities:FindAllByName("portal")
 	portal = temp[1]
@@ -26,11 +27,6 @@ function AIThink()
 
 	Feed()											--always take food
 	Poison()										--always apply poison
-
-	if CalcDistanceBetweenEntityOBB(thisEntity, portal) < 5 then
-		GameRules:Defeated()
-	end
-
 
 	return 1						--returning 1 means that this function repeats on one second intervals
 end

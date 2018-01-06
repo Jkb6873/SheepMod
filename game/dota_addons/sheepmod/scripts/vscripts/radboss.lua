@@ -2,10 +2,11 @@ local sheepsfed = 0		--im setting these counters up to allow feeding sheep at al
 local timer = 0
 
 LinkLuaModifier("bossmod","bossmod.lua", LUA_MODIFIER_MOTION_NONE)
-
+LinkLuaModifier("winmod", "winmod.lua", LUA_MODIFIER_MOTION_NONE)
 
 function Spawn( entityKeyValues )	--links the keyvalue file, which defines stuff like npc model. Can also be done in LUA, but cleaner this way. 
 	thisEntity:AddNewModifier(nil, nil, "bossmod", {})
+	thisEntity:AddNewModifier(nil, nil, "winmod", {})
 	thisEntity:AddNewModifier(nil, nil, "modifier_state_flying_for_pathing_purposes_only", {})
 	thisEntity:SetContextThink( "AIThink", AIThink, 0 )
 end				--name, function, wait time before start. 
@@ -47,7 +48,6 @@ function Feed()
 	for key,unit in pairs(targets) do
 		if unit:IsAlive() == true and unit:GetModelName() == "models/props_gameplay/sheep01.vmdl" then
 			unit:Kill(nil, nil)		--test via model. This is because entities spawned via script will not have the correct name
-			EmitSoundOn("Ability.SandKing_CausticFinale", thisEntity)
 			sheepsfed = sheepsfed + 1
 		end
 	end

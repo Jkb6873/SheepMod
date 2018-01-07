@@ -19,6 +19,8 @@ function Think()
 	elseif sheep_taken == false and port_opened == true then --if opened and no sheep taken
 		TakeSheep()
 	end	
+	radboss:MoveToPosition(thisEntity:GetAbsOrigin())
+	direboss:MoveToPosition(thisEntity:GetAbsOrigin())
 	CheckReach()
 	return .25
 end
@@ -27,25 +29,39 @@ function CheckReach()
 	if foundwinner then
 		return
 	end
-	local bosses = FindUnitsInRadius(thisEntity:GetTeam(), thisEntity:GetAbsOrigin(), nil, 50,
-					DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL,
-					DOTA_UNIT_TARGET_FLAG_NONE, FIND_CLOSEST, false)
-	if bosses[1] == direboss then
+	--local bosses = 	FindUnitsInRadius(thisEntity:GetTeam(), thisEntity:GetAbsOrigin(), nil, 50,
+	--				DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL,
+	--				DOTA_UNIT_TARGET_FLAG_NONE, FIND_CLOSEST, false)
+	--if bosses[1] then
+	--	print("asdf")
+	--	PrintTable(bosses[1])
+	--end
+
+	--if bosses[1] == direboss then
+	if CalcDistanceBetweenEntityOBB(direboss, thisEntity) < 50 then
 		direboss:Stop()
+		
+		print("direboss found")
 		foundwinner = true
+		Notifications:TopToAll({text="(NOT)SANTA IS NOW WEAK, FINISH HIM OFF", duration=10.0})
+		Notifications:BottomToAll({text="THE RADIANT CANNOT HIDE IN THEIR BASE", duration=10.0})
 		radboss:RemoveModifierByName("bossprotection")
 		goodfount:AddNewModifier(thisEntity, nil, "modifier_stunned", {})
 
-	elseif bosses[1] == radboss then
+	elseif CalcDistanceBetweenEntityOBB(radboss, thisEntity) < 50 then
+	--elseif bosses[1] == radboss then
 		radboss:Stop()
+
+		print("radboss found")
 		foundwinner = true
+		Notifications:TopToAll({text="THE GRONCH IS NOW WEAK, FINISH HIM OFF", duration=10.0})
+		Notifications:BottomToAll({text="THE DIRE CANNOT HIDE IN THEIR BASE", duration=10.0})
 		direboss:RemoveModifierByName("bossprotection")
 		badfount:AddNewModifier(thisEntity, nil, "modifier_stunned", {})
 	end
 end
 
 function OpenPortal()
-	print ("portal opened")
 	Msg("The Portal Has Opened, Bring a Sheep Sacrifice")
 	mist =	ParticleManager:CreateParticle("particles/units/heroes/hero_slark/slark_shadow_dance_sceptor_body_pyro.vpcf",
 		PATTACH_ABSORIGIN, thisEntity)
@@ -58,7 +74,6 @@ function OpenPortal()
 end
 
 function ClosePortal()
-	print ("portal closed")
 	ParticleManager:DestroyParticle(mist, false)
 	ParticleManager:DestroyParticle(mist2, false)
 	port_opened = false
@@ -66,7 +81,6 @@ function ClosePortal()
 end
 
 function TakeSheep() 
-	print ("we accepting sheep")
 	local targets = FindUnitsInRadius(	thisEntity:GetTeam(), thisEntity:GetAbsOrigin(), nil, 100,
 					DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL,
 					DOTA_UNIT_TARGET_FLAG_NONE, FIND_CLOSEST, false)

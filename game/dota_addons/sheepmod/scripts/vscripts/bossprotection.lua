@@ -13,19 +13,11 @@ function bossprotection:OnCreated()
 				:SetDamageFilter(Dynamic_Wrap(GameMode, "DamageFilter"), self)
 end
 
-function bossprotection:OnDestroy()
-	GameRules	:GetGameModeEntity()
-				:ClearDamageFilter()
-end
-
 function bossprotection:CheckState()
 	local state = {}
 	state[MODIFIER_STATE_MAGIC_IMMUNE] = true
 	return state
 end
-
-
-
 
 
 
@@ -52,7 +44,6 @@ function GameMode:DamageFilter(params)
 end
 
 function EmitBaaa(entity)
-	print("WE GOT HERE")
 	local x = RandomInt(1, 100)
 	if x == 100 then
 		entity:EmitSound("axe_axe_sheepstick_02")

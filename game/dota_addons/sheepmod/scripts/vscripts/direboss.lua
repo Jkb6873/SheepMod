@@ -1,14 +1,14 @@
 local sheepsfed = 0		--im setting these counters up to allow feeding sheep at all times, and allow stacking durations instead of refreshing. 
 local timer = 0
+--local goal = Entities:FindAllByName("portal")[1]:GetAbsOrigin()
 
-LinkLuaModifier("bossprotection","bossprotection", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("bossprotection","bossprotection.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("winmod", "winmod.lua", LUA_MODIFIER_MOTION_NONE)
 
 function Spawn( entityKeyValues )	--links the keyvalue file, which defines stuff like npc model. Can also be done in LUA, but cleaner this way. 
 	thisEntity:AddNewModifier(nil, nil, "bossprotection", {})
 	thisEntity:AddNewModifier(nil, nil, "winmod", {})
 	thisEntity:AddNewModifier(nil, nil, "modifier_state_flying_for_pathing_purposes_only", {})
-	local temp = Entities:FindAllByName("portal")
-	portal = temp[1]
 	thisEntity:SetContextThink( "AIThink", AIThink, 0 )
 end				--name, function, wait time before start. 
 
@@ -16,7 +16,7 @@ function AIThink()
 	if thisEntity:IsAlive() ~= true then
 		return nil			--if dead, end think function
 	end
-		
+--	thisEntity:MoveToPosition(goal)
 	if sheepsfed == 0 then									--if not fed, then add stun
 		thisEntity:AddNewModifier(thisEntity, nil, "modifier_stunned", {duration = 1})
 	elseif thisEntity:HasModifier("modifier_stunned") == true then				--if fed, but stunned, remove stun

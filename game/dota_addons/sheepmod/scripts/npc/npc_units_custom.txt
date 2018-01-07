@@ -12,6 +12,16 @@
 	"vscripts"		"portal.lua"
 }
 
+//=================================================================================
+// SheepSeller
+//=================================================================================
+"sheepseller"
+{  
+	"BaseClass" 			"npc_dota_creature"
+	"Model"					"models/heroes/shopkeeper_dire/shopkeeper_dire.vmdl"
+	"AttackCapabilities"	"DOTA_UNIT_CAP_NO_ATTACK"
+	"vscripts"				"sheepseller.lua"
+}
 
 //=================================================================================
 // fakebox

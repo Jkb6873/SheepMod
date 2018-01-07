@@ -16,6 +16,8 @@ end
 function bossprotection:CheckState()
 	local state = {}
 	state[MODIFIER_STATE_MAGIC_IMMUNE] = true
+	state[MODIFIER_STATE_NO_UNIT_COLLISION] = true
+	state[MODIFIER_STATE_UNSELECTABLE] = true
 	return state
 end
 

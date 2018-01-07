@@ -8,7 +8,6 @@ LinkLuaModifier("winmod", "winmod.lua", LUA_MODIFIER_MOTION_NONE)
 function Spawn( entityKeyValues )	--links the keyvalue file, which defines stuff like npc model. Can also be done in LUA, but cleaner this way. 
 	thisEntity:AddNewModifier(nil, nil, "bossprotection", {})
 	thisEntity:AddNewModifier(nil, nil, "winmod", {})
-	thisEntity:AddNewModifier(nil, nil, "modifier_state_flying_for_pathing_purposes_only", {})
 	thisEntity:SetContextThink( "AIThink", AIThink, 0 )
 end				--name, function, wait time before start. 
 

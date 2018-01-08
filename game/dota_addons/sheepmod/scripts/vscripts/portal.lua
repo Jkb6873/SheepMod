@@ -82,16 +82,16 @@ function TakeSheep()
 			local grab =	ParticleManager:CreateParticle("particles/econ/items/shadow_demon/sd_ti7_shadow_poison/sd_ti7_golden_shadow_poison_release_crush_carrier.vpcf",
 					PATTACH_ABSORIGIN, thisEntity)
 			ParticleManager:SetParticleControl(grab, 0, thisEntity:GetAbsOrigin())
-			ParticleManager:SetParticleControl(grab, 1, Vector(particle_radius,0,0))
+			ParticleManager:SetParticleControl(grab, 2, thisEntity:GetAbsOrigin())--Vector(particle_radius,0,0))
+			ParticleManager:SetParticleControl(grab, 3, thisEntity:GetAbsOrigin())
+			ParticleManager:SetParticleControl(grab, 4, thisEntity:GetAbsOrigin())
 			local boom =	ParticleManager:CreateParticle("particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_shadowraze.vpcf",
 					PATTACH_ABSORIGIN, thisEntity)
 			ParticleManager:SetParticleControl(boom, 0, thisEntity:GetAbsOrigin())
-			ParticleManager:SetParticleControl(boom, 1, Vector(particle_radius,0,0))
+			ParticleManager:SetParticleControl(boom, 3, thisEntity:GetAbsOrigin())--Vector(particle_radius,0,0))
 			
-			local boom2 =	ParticleManager:CreateParticle("particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_wings_grow_rope.vpcf",
-					PATTACH_ABSORIGIN, thisEntity)
-			ParticleManager:SetParticleControl(boom2, 0, thisEntity:GetAbsOrigin())
-			ParticleManager:SetParticleControl(boom2, 1, Vector(particle_radius,0,0))
+			EmitGlobalSound("Hero_Phoenix.SuperNova.Explode")
+
 			ClosePortal()
 			SurvivalSetup(unit:GetTeam())
 			return

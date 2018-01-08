@@ -5,8 +5,8 @@ require('gamemode')
 
 function Precache( context )
   DebugPrint("[BAREBONES] Performing pre-load precache")
-
   PrecacheUnitByNameSync("npc_dota_hero_ancient_apparition", context)
+  PrecacheUnitByNameSync("npc_dota_hero_lich", context)
   PrecacheUnitByNameSync("npc_dota_hero_invoker", context)
   PrecacheUnitByNameSync("npc_dota_hero_sand_king", context)
   PrecacheUnitByNameSync("npc_dota_hero_axe", context)

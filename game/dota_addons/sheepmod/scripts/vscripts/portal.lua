@@ -29,29 +29,19 @@ function CheckReach()
 	if foundwinner then
 		return
 	end
-	--local bosses = 	FindUnitsInRadius(thisEntity:GetTeam(), thisEntity:GetAbsOrigin(), nil, 50,
-	--				DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL,
-	--				DOTA_UNIT_TARGET_FLAG_NONE, FIND_CLOSEST, false)
-	--if bosses[1] then
-	--	print("asdf")
-	--	PrintTable(bosses[1])
-	--end
 
-	--if bosses[1] == direboss then
-	if CalcDistanceBetweenEntityOBB(direboss, thisEntity) < 50 then
+	if CalcDistanceBetweenEntityOBB(direboss, thisEntity) < 25 then
+		EmitGlobalSound("jboberg_01.music.battle_02")
 		direboss:Stop()
-		
 		print("direboss found")
 		foundwinner = true
 		Notifications:TopToAll({text="(NOT)SANTA IS NOW WEAK, FINISH HIM OFF", duration=10.0})
 		Notifications:BottomToAll({text="THE RADIANT CANNOT HIDE IN THEIR BASE", duration=10.0})
 		radboss:RemoveModifierByName("bossprotection")
 		goodfount:AddNewModifier(thisEntity, nil, "modifier_stunned", {})
-
-	elseif CalcDistanceBetweenEntityOBB(radboss, thisEntity) < 50 then
-	--elseif bosses[1] == radboss then
+	elseif CalcDistanceBetweenEntityOBB(radboss, thisEntity) < 25 then
+		EmitGlobalSound("jboberg_01.music.battle_02")
 		radboss:Stop()
-
 		print("radboss found")
 		foundwinner = true
 		Notifications:TopToAll({text="THE GRONCH IS NOW WEAK, FINISH HIM OFF", duration=10.0})

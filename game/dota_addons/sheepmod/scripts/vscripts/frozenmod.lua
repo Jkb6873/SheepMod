@@ -18,6 +18,13 @@ function frozenmod:OnDeath(params)
 	if not (params.unit == self:GetParent()) then
 		return
 	end
+	explosion =	ParticleManager:CreateParticle("particles/econ/items/ancient_apparition/aa_blast_ti_5/ancient_apparition_ice_blast_explode_ti5.vpcf",
+		PATTACH_ABSORIGIN, self:GetParent())
+	ParticleManager:SetParticleControl(explosion, 0, self:GetParent():GetAbsOrigin())
+	ParticleManager:SetParticleControl(explosion, 3, self:GetParent():GetAbsOrigin())
+	self:GetParent():EmitSound("Hero_Lich.FrostBlast.Immortal")
+
+	self:GetParent():SetModelScale(.01)
 	CreateUnitByName("sheep", self:GetParent():GetAbsOrigin(), true,nil,nil,DOTA_TEAM_NEUTRALS)
 end
 

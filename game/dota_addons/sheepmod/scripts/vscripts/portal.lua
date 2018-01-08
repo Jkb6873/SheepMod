@@ -91,6 +91,12 @@ function TakeSheep()
 			ParticleManager:SetParticleControl(boom, 3, thisEntity:GetAbsOrigin())--Vector(particle_radius,0,0))
 			
 			EmitGlobalSound("Hero_Phoenix.SuperNova.Explode")
+			Timers:CreateTimer({
+				endTime = 1, -- when this timer should first execute, you can omit this if you want it to run first on the next frame
+				callback = function()
+					EmitGlobalSound("warlock_golem_wargol_laugh_07")
+				end
+			 })
 
 			ClosePortal()
 			SurvivalSetup(unit:GetTeam())

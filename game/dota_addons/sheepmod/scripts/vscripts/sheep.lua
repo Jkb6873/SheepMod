@@ -8,6 +8,7 @@ end
 function Think()
 	if thisEntity:IsAlive() ~= true then
 		deathscream()
+		thisEntity:SetModelScale(.01)
 		local expload =	ParticleManager:CreateParticle("particles/units/heroes/hero_sandking/sandking_caustic_finale_explode.vpcf",
 						PATTACH_ABSORIGIN, thisEntity)
 		ParticleManager:SetParticleControl(expload, 0, thisEntity:GetAbsOrigin())
